@@ -1,0 +1,23 @@
+#define IN1 9
+#define IN2 8
+#define ENA 10
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(ENA, OUTPUT);
+
+  // Set motor direction (Fan Forward)
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+}
+
+void loop() {
+  if (Serial.available()) {
+    int speed = Serial.parseInt();
+    if (speed >= 0 && speed <= 255) {
+      analogWrite(ENA, speed);
+    }
+  }
+}
